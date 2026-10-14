@@ -2,9 +2,8 @@ import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  const [name, setName] = useState("");
-  const [strasse, setStrasse] = useState("");
-  const [hausnummer, setHausnummer] = useState(0);
+  const defaultadress = {name: "", strasse: "", hausnummer: 0 }
+  const [adresse, setAdresse] = useState (defaultadress)
 
   return (
     <div id="app">
@@ -17,8 +16,8 @@ export default function App() {
             className="input"
             placeholder="Nachname"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={adresse.name}
+            onChange={(e) => setAdresse({...adresse, name: e.target.value})}
           />
         </div>
         <div className="container">
@@ -27,8 +26,8 @@ export default function App() {
             className="input"
             placeholder="Strassenname"
             type="text"
-            value={strasse}
-            onChange={(e) => setStrasse(e.target.value)}
+            value={adresse.strasse}
+            onChange={(e) => setAdresse({...adresse, strasse: e.target.value})}
           />
         </div>
         <div className="container">
@@ -36,20 +35,20 @@ export default function App() {
           <input
             className="input"
             type="number"
-            value={hausnummer}
-            onChange={(e) => setHausnummer(parseInt(e.target.value))} // String aus Event wird zu Zahl
+            value={adresse.hausnummer}
+            onChange={(e) => setAdresse({...adresse, hausnummer: parseInt(e.target.value)})} // String aus Event wird zu Zahl
           />
         </div>
         <button
           className="Button"
           onClick={() => {
             // Zeigt die Eingaben aus den Feldern als Popup:
-            alert(`Gesendet an ${name}, in ${strasse} ${hausnummer}`);
+            alert(`Gesendet an ${adresse.name}, in ${adresse.strasse} ${adresse.hausnummer}`);
           }}
         >
           Absenden
         </button>
-        <button className="Button" onClick={() => null}>
+        <button className="Button" onClick={() => setAdresse (defaultadress)}>
           Zurücksetzen
         </button>
       </div>
